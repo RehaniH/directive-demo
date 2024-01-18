@@ -1,0 +1,44 @@
+<div>
+  <button (click)="oddSelected = !oddSelected">{{ oddSelected ? 'Odd': 'Even'}}</button>
+  <div *ngIf="oddSelected">
+    <li [ngClass]=" {odd: odd%2 !== 0}" [ngStyle]="{'backgroundColor': odd%2 !== 0 ? 'yellow': 'transparent'}"
+      *ngFor="let odd of oddArray">
+      {{'Odd - ' + odd }}
+    </li>
+  </div>
+
+  <div *ngIf="!oddSelected">
+    <li [ngStyle]="{'backgroundColor': even%2 !== 0 ? 'yellow': 'transparent'}" [ngClass]=" {odd: even%2 !== 0}"
+      *ngFor="let even of evenArray">
+      {{'Even - ' + even }}
+    </li>
+  </div>
+  <ng-template [ngIf]="!oddSelected">
+    <div>
+      <li [ngStyle]="{'backgroundColor': even%2 !== 0 ? 'yellow': 'transparent'}" [ngClass]=" {odd: even%2 !== 0}"
+        *ngFor="let even of evenArray">
+        {{'Even - ' + even }}
+      </li>
+    </div>
+  </ng-template>
+  <div *appUnless="oddSelected">
+    <li [ngStyle]="{'backgroundColor': even%2 !== 0 ? 'yellow': 'transparent'}" [ngClass]=" {odd: even%2 !== 0}"
+      *ngFor="let even of evenArray">
+      {{'Even - ' + even }}
+    </li>
+  </div>
+  <p appBasicHighlight>style me with basic attribute directive</p>
+  <p appBetterHighlight [defaultColor]="'yellow'" [highlightColor]="'red'">style me with better attribute directive</p>
+  <p appMyFocus [customDefaultColor]="'green'" customHighlightColor="blue">My focus directive</p>
+
+  <div>
+    <input type="text" name="myValue" [(ngModel)]="myValue">
+  </div>
+
+  <div [ngSwitch]="myValue">
+    <p *ngSwitchCase="5">value is 5 </p>
+    <p *ngSwitchCase="10">value is 10 </p>
+    <p *ngSwitchCase="15">value is 15 </p>
+    <p *ngSwitchDefault>value is default </p>
+  </div>
+</div>
